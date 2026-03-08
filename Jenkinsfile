@@ -59,6 +59,8 @@ pipeline {
                     icacls C:\\jenkins_key.pem /grant:r SYSTEM:R
                     icacls C:\\jenkins_key.pem /grant:r Administrators:R
 
+                    ssh -o StrictHostKeyChecking=no -i C:\\jenkins_key.pem ec2-user@%EC2_IP% docker network create appnetwork || true
+
                     ssh -o StrictHostKeyChecking=no -i C:\\jenkins_key.pem ec2-user@%EC2_IP% docker pull %BACKEND_IMAGE%:latest
                     ssh -o StrictHostKeyChecking=no -i C:\\jenkins_key.pem ec2-user@%EC2_IP% docker pull %FRONTEND_IMAGE%:latest
 
