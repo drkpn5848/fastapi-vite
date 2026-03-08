@@ -1,6 +1,5 @@
 //export const APIURL = "https://pbl.klef.in/";
 //export const APIURL = "http://localhost:8000/";
-//Connect with ec2
 export const APIURL = "http://43.204.24.75:8000/"
 export const IMGURL = import.meta.env.BASE_URL;
 
