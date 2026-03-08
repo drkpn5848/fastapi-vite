@@ -49,17 +49,17 @@ pipeline {
                 keyFileVariable: 'KEYFILE')]) {
 
                     bat """
-                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker pull drkpn5848/fastapi-backend:latest
-                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker pull drkpn5848/react-frontend:latest
+                    ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i %KEYFILE% ec2-user@43.204.24.75 docker pull drkpn5848/fastapi-backend:latest
+                    ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i %KEYFILE% ec2-user@43.204.24.75 docker pull drkpn5848/react-frontend:latest
 
-                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker stop backend || true
-                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker stop frontend || true
+                    ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i %KEYFILE% ec2-user@43.204.24.75 docker stop backend
+                    ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i %KEYFILE% ec2-user@43.204.24.75 docker stop frontend
 
-                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker rm backend || true
-                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker rm frontend || true
+                    ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i %KEYFILE% ec2-user@43.204.24.75 docker rm backend
+                    ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i %KEYFILE% ec2-user@43.204.24.75 docker rm frontend
 
-                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker run -d -p 8000:8000 --name backend drkpn5848/fastapi-backend:latest
-                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker run -d -p 80:80 --name frontend drkpn5848/react-frontend:latest
+                    ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i %KEYFILE% ec2-user@43.204.24.75 docker run -d -p 8000:8000 --name backend drkpn5848/fastapi-backend:latest
+                    ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i %KEYFILE% ec2-user@43.204.24.75 docker run -d -p 80:80 --name frontend drkpn5848/react-frontend:latest
                     """
                 }
             }
