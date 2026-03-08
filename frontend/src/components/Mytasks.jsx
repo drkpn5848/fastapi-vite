@@ -50,6 +50,26 @@ const Mytasks = ({ onLogout, errorHandler, showToast }) => {
         setIsEdit({...task, duedate: formattedDate});
     }
 
+    function updateTask(){
+        setIsProgress(true);
+        lib.callApi("PUT", lib.APIURL + `tasks/task/${isEdit.id}/${isEdit.status}`,"", updateTaskResponse, (err)=>{setIsProgress(false); errorHandler(err);}, csrid);
+    }
+
+    function updateTaskResponse(res){
+        if(res.code !== 200)
+            showToast("error", res.msg);
+        else
+        {
+            setTasksData({
+                ...tasksData,
+                tasks: tasksData.tasks.map(t => t.id === res.task.id ? res.task : t)
+            });
+            showToast("success", res.msg);
+        }    
+        setIsEdit(null);           
+        setIsProgress(false);
+    }
+
     function deleteTask(task){
 
     }

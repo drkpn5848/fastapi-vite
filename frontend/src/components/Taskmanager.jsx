@@ -156,10 +156,10 @@ const Taskmanager = ({ onLogout, errorHandler, showToast }) => {
         if(res.code !== 200)
             showToast("error", res.msg);
         else{
-            setTasksData(tasksData => ({
+            setTasksData({
                 ...tasksData,
                 tasks: tasksData.tasks.map(t => t.id === res.task.id ? res.task : t)
-            }));
+            });
             showToast("success", res.msg);
         }
         setIsEdit(null); 
@@ -177,10 +177,10 @@ const Taskmanager = ({ onLogout, errorHandler, showToast }) => {
         if(res.code !== 200)
             showToast("error", res.msg);
         else{
-            setTasksData(tasksData => ({
+            setTasksData({
                 ...tasksData,
                 tasks: tasksData.tasks.filter(t => t.id !== res.id)
-            }));
+            });
             showToast("success", res.msg);
         }
         setIsProgress(false);
