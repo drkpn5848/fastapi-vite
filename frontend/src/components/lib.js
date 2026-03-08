@@ -1,6 +1,6 @@
 //export const APIURL = "https://pbl.klef.in/";
 //export const APIURL = "http://localhost:8000/";
-export const APIURL = "http://ec2-13-201-225-3.ap-south-1.compute.amazonaws.com:8000/"
+export const APIURL = "http://43.204.24.75:8000/"
 export const IMGURL = import.meta.env.BASE_URL;
 
 export function callApi(rmethod, url, data, responseHandler, errorHandler, csrid = "",)
