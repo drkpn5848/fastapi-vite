@@ -45,23 +45,24 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                sshagent(['ec2key']) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'ec2key',
+                keyFileVariable: 'KEYFILE')]) {
+
                     bat """
-                    ssh ec2-user@%EC2_IP% docker pull %BACKEND_IMAGE%:latest
-                    ssh ec2-user@%EC2_IP% docker pull %FRONTEND_IMAGE%:latest
+                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker pull drkpn5848/fastapi-backend:latest
+                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker pull drkpn5848/react-frontend:latest
 
-                    ssh ec2-user@%EC2_IP% docker stop backend || true
-                    ssh ec2-user@%EC2_IP% docker stop frontend || true
+                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker stop backend || true
+                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker stop frontend || true
 
-                    ssh ec2-user@%EC2_IP% docker rm backend || true
-                    ssh ec2-user@%EC2_IP% docker rm frontend || true
+                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker rm backend || true
+                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker rm frontend || true
 
-                    ssh ec2-user@%EC2_IP% docker run -d -p 8000:8000 --name backend %BACKEND_IMAGE%:latest
-                    ssh ec2-user@%EC2_IP% docker run -d -p 80:80 --name frontend %FRONTEND_IMAGE%:latest
+                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker run -d -p 8000:8000 --name backend drkpn5848/fastapi-backend:latest
+                    ssh -i %KEYFILE% -o StrictHostKeyChecking=no ec2-user@43.204.24.75 docker run -d -p 80:80 --name frontend drkpn5848/react-frontend:latest
                     """
                 }
             }
         }
-
     }
 }
