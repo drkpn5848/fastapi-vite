@@ -3,21 +3,26 @@ pipeline {
 
     environment {
         DOCKER_USER = "drkpn5848"
-        IMAGE = "${DOCKER_USER}/fastapi-react-app"
+        BACKEND_IMAGE = "${DOCKER_USER}/fastapi-backend"
+        FRONTEND_IMAGE = "${DOCKER_USER}/react-frontend"
         EC2_IP = "43.204.24.75"
     }
 
     stages {
 
-        stage('Clone Repository') {
+        stage('Build Backend Image') {
             steps {
-                git 'https://github.com/drkpn5848/fastapi-vite.git'
+                dir('backend') {
+                    bat 'docker build -t %BACKEND_IMAGE%:latest .'
+                }
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build Frontend Image') {
             steps {
-                bat 'docker build -t %IMAGE%:latest .'
+                dir('frontend') {
+                    bat 'docker build -t %FRONTEND_IMAGE%:latest .'
+                }
             }
         }
 
@@ -31,9 +36,10 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+        stage('Push Images') {
             steps {
-                bat 'docker push %IMAGE%:latest'
+                bat 'docker push %BACKEND_IMAGE%:latest'
+                bat 'docker push %FRONTEND_IMAGE%:latest'
             }
         }
 
@@ -41,10 +47,17 @@ pipeline {
             steps {
                 sshagent(['ec2key']) {
                     bat """
-                    ssh ec2-user@%EC2_IP% docker pull %IMAGE%:latest
-                    ssh ec2-user@%EC2_IP% docker stop app || true
-                    ssh ec2-user@%EC2_IP% docker rm app || true
-                    ssh ec2-user@%EC2_IP% docker run -d -p 80:80 --name app %IMAGE%:latest
+                    ssh ec2-user@%EC2_IP% docker pull %BACKEND_IMAGE%:latest
+                    ssh ec2-user@%EC2_IP% docker pull %FRONTEND_IMAGE%:latest
+
+                    ssh ec2-user@%EC2_IP% docker stop backend || true
+                    ssh ec2-user@%EC2_IP% docker stop frontend || true
+
+                    ssh ec2-user@%EC2_IP% docker rm backend || true
+                    ssh ec2-user@%EC2_IP% docker rm frontend || true
+
+                    ssh ec2-user@%EC2_IP% docker run -d -p 8000:8000 --name backend %BACKEND_IMAGE%:latest
+                    ssh ec2-user@%EC2_IP% docker run -d -p 80:80 --name frontend %FRONTEND_IMAGE%:latest
                     """
                 }
             }
