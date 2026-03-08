@@ -1,0 +1,87 @@
+.home{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    
+    display: grid;
+    grid-template-rows: 50px calc(100% - 80px) 30px;
+    grid-template-columns: 200px calc(100% - 200px);
+}
+.home .header,
+.home .footer{
+    grid-column: 1 / span 2;
+    background: var(--light);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.home .header{
+    border-bottom: 1px solid rgb(0,0,0,0.1);
+}
+.home .footer{
+    border-top: 1px solid rgb(0,0,0,0.1);
+    font-size: 8pt;
+}
+.home .menus{
+    background: var(--light);
+    border-right: 1px solid rgb(0,0,0,0.1);
+}
+.home .menus .mtitle{
+    height: 39px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11pt;
+    margin: 0 10px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--bg2);
+}
+.home .menus .mtitle span{
+    font-weight: 600;
+    font-size: 12pt;
+}
+.home .menus nav{
+    width: 100%;
+    height: calc(100% - 40px);
+}
+.home .workspace{
+    background: var(--bg2);
+}
+.home .workspace .wtitle{
+    height: 39px;
+    width: calc(100% - 5px);
+    background: var(--light);
+    border-bottom: 1px solid rgb(0,0,0,0.1);
+    padding-left: 5px;
+
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 12pt;
+}
+.home .workspace .wspace{
+    height: calc(100% - 40px);
+    width: 100%;
+}
+.home .header img{
+    height: 40px;
+    width: 110px;
+    margin-left: 10px;
+}
+.home .header div{
+    display: flex;
+    align-items: center;
+}
+.home .header div label{
+    font-weight: 600;
+}
+.home .header div img{
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+.home .header div img:hover{
+    cursor: pointer;
+    opacity: 0.6;
+}

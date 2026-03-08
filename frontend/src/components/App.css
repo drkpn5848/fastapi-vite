@@ -1,0 +1,118 @@
+.app{
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom, var(--bg1), var(--light));
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.app .signin-container,
+.app .signup-container{
+    background: #fff;
+    border-radius: 10px;
+    width: 400px;
+    padding: 20px;
+    box-shadow: 0 10px 20px #ccc;
+
+    display: flex;
+    flex-direction: column;
+}
+.app .signin-container .logo-container,
+.app .signup-container .logo-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.app .signin-container .logo-container h2,
+.app .signup-container .logo-container h2
+{
+    color: var(--primary);
+}
+.app .signup-container .logo-container{
+    margin-bottom: 10px;
+}
+.app .signin-container .logo-container .logo,
+.app .signup-container .logo-container .logo{
+    width: 160px;
+    height: 60px;
+}
+.app .signin-container .input-group,
+.app .signup-container .input-group{
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+.app .signup-container .input-group{
+    margin-bottom: 10px;
+}
+.app .signin-container .input-group img,
+.app .signup-container .input-group img{
+    height: 16px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.app .signin-container .input-group .left-icon,
+.app .signup-container .input-group .left-icon{
+    left: 5px;
+}
+.app .signin-container .input-group .right-icon,
+.app .signup-container .input-group .right-icon{
+    right: 5px;
+    height: 22px;
+    cursor: pointer;
+}
+.app .signin-container .input-group input,
+.app .signup-container .input-group input{
+    width: 100%;
+    height: 45px;
+    border: none;
+    background: #f2f2f2;
+    padding: 0 25px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+.app .signin-container .forgot-password{
+    width: 100%;
+    text-align: right;
+    padding-bottom: 20px;
+}
+.app .signin-container .forgot-password label,
+.app .signin-container p label,
+.app .signup-container p label{
+    cursor: pointer;
+    color: dodgerblue;
+    font-weight: 600;
+}
+.app .signin-container button,
+.app .signup-container button{
+    border: none;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 10px;
+}
+.app .signin-container button:hover,
+.app .signup-container button:hover{
+    cursor: pointer;
+    background: var(--light-primary);
+}
+.app .signin-container button:focus,
+.app .signup-container button:focus{
+    outline: none;
+    background: var(--light-primary);
+}
+.app .signin-container .input-group .error,
+.app .signup-container .input-group .error{
+    border: 1px solid red;
+}
+
+@media(max-width: 768px){
+    .app .signin-container,
+    .app .signup-container{
+        width: 350px;
+    }
+}

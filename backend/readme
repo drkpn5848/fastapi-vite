@@ -1,0 +1,47 @@
+Activate venv
+-------------
+python -m venv venv
+
+venv\Scripts\activate
+
+install fastapi
+---------------
+pip install fastapi uvicorn sqlalchemy pymysql python-dotenv
+
+install jwt
+-----------
+pip install python-jose
+
+install cryptography
+--------------------
+pip install cryptography
+Fernet.generate_key()
+
+Create requirement file
+-----------------------
+pip freeze > requirements.txt
+pip install requirements.txt
+
+Create Windows Service
+----------------------
+Open Command Prompt in Administrator mode
+sc delete FastAPIService
+
+Create new:
+sc create FastAPIService binPath= "cmd /c D:\PBL\MTH\backend\start_fastapi.bat" start= auto
+
+Then Start:
+sc start FastAPIService
+
+Using NSSM:
+Download nssm.zip:
+Extract in C:\nssm
+cd c:\nssm\win64\
+nssm install FastAPIService
+    Application Path:python.exe
+    Startup Directory: C:\WEB\PBL
+    Arguments: run.py
+
+net start PBLFastAPIService
+net stop PBLFastAPIService
+netstat -ano | findstr :4000

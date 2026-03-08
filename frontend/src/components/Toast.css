@@ -1,0 +1,96 @@
+.notifications {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    z-index: 999;
+}
+.notifications .toast {
+    margin-top: 10px;
+    width: 300px;
+    box-shadow: 5px 5px 10px #888888;
+    position: relative;
+    list-style: none;
+    border: 1px solid silver;
+    border-radius: 4px;
+    padding: 10px 10px;
+    background: var(--light);
+    animation: show_toast 0.3s ease forwards;
+}
+.notifications .toast .hide {
+  animation: hide_toast 0.3s ease forwards;
+}
+.notifications .toast .column{
+  display: flex;
+  align-items: center;
+}
+.notifications .toast .column img{
+  width: 24px;
+}
+.notifications .toast::before {
+  position: absolute;
+  content: "";
+  height: 3px;
+  width: 100%;
+  background: red;
+  bottom: 0px;
+  left: 0px;
+  animation: progress 5s linear forwards;
+}
+@keyframes show_toast {
+  0% {
+    transform: translateX(100%);
+  }
+  40% {
+    transform: translateX(-5%);
+  }
+  80% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+@keyframes hide_toast {
+  0% {
+    transform: translateX(-10px);
+  }
+  40% {
+    transform: translateX(0%);
+  }
+  80% {
+    transform: translateX(-5%);
+  }
+  100% {
+    transform: translateX(calc(100% + 20px));
+  }
+}
+@keyframes progress {
+  100% {
+    width: 0%;
+  }
+}
+.notifications .toast.success::before {
+  background: var(--success);
+}
+.notifications .toast.error::before {
+  background: var(--error);
+}
+.notifications .toast.warning::before {
+  background: var(--warning);
+}
+.notifications .toast .column span {
+    font-size: 9pt;
+    margin-left: 10px;
+}
+.notifications .toast label {
+    position:fixed;
+    top: 0px;
+    right:10px;
+    font-size:16pt;
+    color: #aeb0d7;
+    cursor: pointer;
+}
+.notifications .toast label:hover {
+    color: var(--dark);
+}

@@ -1,0 +1,45 @@
+.profile{
+    height: calc(100% - 40px);
+    width: calc(100% - 40px);
+    position: relative;
+
+    padding: 20px;
+    overflow: auto;
+}
+.profile .container{
+    width: calc(100% - 60px);
+    height: calc(100% - 60px);
+    min-width: 400px;
+    background: var(--light);
+    border-radius: 5px;
+    padding: 30px;
+}
+.profile .container .info{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.profile .container .info img{
+    height: 75px;
+    border: 1px solid var(--light-text);
+    border-radius: 50px;
+}
+.profile .container .info div{
+    display: flex;
+    flex-direction: column;
+}
+.profile .container .info div label{
+    font-size: 12pt;
+    font-weight: bold;
+}
+.profile .container .info div span{
+    color: var(--light-text);
+}
+.profile .container .info-data{
+    margin-top: 20px;
+    border-top: 1px solid var(--bg2);
+}
+.profile .container .info-data p{
+    display: grid;
+    grid-template-columns: 150px auto;
+}
