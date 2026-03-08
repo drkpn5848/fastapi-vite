@@ -39,3 +39,16 @@ def dashboard(token: str = Header(...), db: Session = Depends(getConnection)):
             "inprogresstasks": inprogresstasks,
             "completedtasks": completedtasks
         }
+    else:
+        totaltasks = db.query(Tasks).join(Users, Tasks.assignedto == Users.id).filter(Users.emailid == emailid).count()
+        assignedtasks = db.query(Tasks).join(Users, Tasks.assignedto == Users.id).filter(Users.emailid == emailid, Tasks.status == 0).count()
+        inprogresstasks = db.query(Tasks).join(Users, Tasks.assignedto == Users.id).filter(Users.emailid == emailid, Tasks.status == 1).count()
+        completedtasks = db.query(Tasks).join(Users, Tasks.assignedto == Users.id).filter(Users.emailid == emailid, Tasks.status == 2).count()
+        return {
+            "code": 200,
+            "rid": role,
+            "totaltasks": totaltasks,
+            "assignedtasks": assignedtasks,
+            "inprogresstasks": inprogresstasks,
+            "completedtasks": completedtasks
+        }

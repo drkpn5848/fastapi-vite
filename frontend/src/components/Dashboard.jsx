@@ -82,15 +82,19 @@ const Dashboard = ({ onLogout, errorHandler, showToast }) => {
                     <div className='analysis'>
                         <div>
                             <h3>Assigned Tasks</h3>
-                            <h1>{10}</h1>
-                        </div>
-                        <div>
-                            <h3>Completed Tasks</h3>
-                            <h1>{7}</h1>
+                            <h1>{data.totaltasks}</h1>
                         </div>
                         <div>
                             <h3>Pending Tasks</h3>
-                            <h1>{3}</h1>
+                            <h1>{data.assignedtasks}</h1>
+                        </div>
+                        <div>
+                            <h3>In-Progress</h3>
+                            <h1>{data.inprogresstasks}</h1>
+                        </div>
+                        <div>
+                            <h3>Completed</h3>
+                            <h1>{data.completedtasks}</h1>
                         </div>
                     </div>
                 </div>
